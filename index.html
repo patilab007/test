@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <script>
+        function validateForm() {
+            var name = document.forms["myForm"]["fname"].value;
+            var email = document.forms["myForm"]["femail"].value;
+            var mobile = document.forms["myForm"]["fmobile"].value;
+            var gender = document.forms["myForm"]["fgender"].value;
+            var fDOB = document.forms["myForm"]["fDOB"].value;
+            //name validation
+            if (name == "") {
+                alert("Name must be filled out");
+                return false;
+            }
+            //email validation
+            if (email == "" && !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+                alert("You have entered an invalid email address!")
+                return false;
+            }
+            //mobile number validation
+            if (!(/^\d{10}$/.test(mobile))) {
+                alert("Please enter valide mobile number")
+                return false;
+            }
+            if (gender == "") {
+                alert("Gender must be Selected");
+                return false;
+            }
+           
+            // using ISO 8601 Date String
+            var data = fDOB.split("/");
+            if (isNaN(Date.parse(data[2] + "-" + data[1] + "-" + data[0]))) {
+                alert(" select valide Birthdate");
+                return false;
+            }
+           return true;
+        } 
+
+        function submitForm(){
+            if(validateForm()){
+                window.open('./detail.html', '_blank');
+            }
+            return false;
+        }
+    </script>
+</head>
+
+<body style="align-content: center;">
+    <div style="border: 1px;max-width: 500px; margin: auto; height: 50%; margin-top: 15%; ">
+        <form name="myForm" onsubmit="return submitForm()" method="post">
+            <table>
+                <tr>
+                    <td><label style="float: left; margin-top: 15px;">Name :</label> <input type="text" name="fname"
+                            style="float: right; padding: 10px; width: 200px; margin-left: 100px;"></td>
+                </tr>
+                <tr>
+                    <td> <label style="float: left; margin-top: 15px;">Email :</label> <input type="text" name="femail"
+                            style="float: right; padding: 10px; width: 200px; margin-top: 10px;"></td>
+                </tr>
+                <tr>
+                    <td> <label style="float: left; margin-top: 15px;">Mobile :</label> <input type="number"
+                            name="fmobile" style="float: right; padding: 10px; width: 200px; margin-top: 10px;"></td>
+                </tr>
+                <tr>
+                    <td> <label style="float: left; margin-top: 20px;">Gender :</label>
+                        <input type="radio" name="fgender" value="female" style="margin-left: 100px; margin-top: 20px;">
+                        <label>Female</label>
+                        <input type="radio" name="fgender" value="male">
+                        <label>Male</label>
+                        <input type="radio" name="fgender" value="other">
+                        <label>Other</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="birthday" style="float: left; margin-top: 15px; ">Birthday:</label>
+                        <input type="date" id="birthday" name="fDOB"
+                            style="float: right; padding: 10px; width: 200px; margin-top: 10px;">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit"
+                            style="margin-left: 100px; margin-top: 50px; padding: 100px; width: 200px;"></td>
+                </tr>
+
+            </table>
+
+        </form>
+    </div>
+</body>
+
+</html>
